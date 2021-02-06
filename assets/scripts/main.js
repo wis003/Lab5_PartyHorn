@@ -1,5 +1,52 @@
-// main.js
+// listener for change in volume
+document.getElementById("volume-number").addEventListener("input", changeVolumeNumber);
+document.getElementById("volume-slider").addEventListener("input", changeVolumeSlider);
 
+function changeVolumeNumber() {
+    document.getElementById("volume-slider").value = document.getElementById("volume-number").value;
+
+    let vol = document.getElementById("volume-slider").value;
+    if(vol == 0) {
+        document.getElementById("honk-btn").disabled = true;
+        document.getElementById("volume-image").src = "./assets/media/icons/volume-level-0.svg";
+    }
+    else if(vol >=1 && vol <= 33) {
+        document.getElementById("honk-btn").disabled = false;
+        document.getElementById("volume-image").src = "./assets/media/icons/volume-level-1.svg";
+    }
+    else if(vol >= 34 && vol <= 66) {
+        document.getElementById("honk-btn").disabled = false;
+        document.getElementById("volume-image").src = "./assets/media/icons/volume-level-2.svg";
+    }
+    else {
+        document.getElementById("honk-btn").disabled = false;
+        document.getElementById("volume-image").src = "./assets/media/icons/volume-level-3.svg";
+    }
+}
+
+function changeVolumeSlider() {
+    document.getElementById("volume-number").value = document.getElementById("volume-slider").value;
+
+    let vol = document.getElementById("volume-slider").value;
+    if(vol == 0) {
+        document.getElementById("honk-btn").disabled = true;
+        document.getElementById("volume-image").src = "./assets/media/icons/volume-level-0.svg";
+    }
+    else if(vol >=1 && vol <= 33) {
+        document.getElementById("honk-btn").disabled = false;
+        document.getElementById("volume-image").src = "./assets/media/icons/volume-level-1.svg";
+    }
+    else if(vol >= 34 && vol <= 66) {
+        document.getElementById("honk-btn").disabled = false;
+        document.getElementById("volume-image").src = "./assets/media/icons/volume-level-2.svg";
+    }
+    else {
+        document.getElementById("honk-btn").disabled = false;
+        document.getElementById("volume-image").src = "./assets/media/icons/volume-level-3.svg";
+    }
+}
+
+// listener for change in sound
 document.getElementById("radio-air-horn").addEventListener("change", changeSoundHorn);
 document.getElementById("radio-car-horn").addEventListener("change", changeSoundCar);
 document.getElementById("radio-party-horn").addEventListener("change", changeSoundParty);
@@ -23,6 +70,7 @@ function changeSoundParty() {
 document.getElementById("honk-btn").addEventListener("click", playSound);
 
 function playSound(event) {
+    document.getElementById("horn-sound").volume = (document.getElementById("volume-number").value) / 100;
     document.getElementById("horn-sound").play();
     event.preventDefault();
 }
